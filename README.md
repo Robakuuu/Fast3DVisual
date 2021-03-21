@@ -20,12 +20,12 @@ Fast3DVisual allows you to Drag&Drop 3D object file (for example .obj) and visua
 * Visual Studio 2019
 
 ## Setup
-Compile it in VS2019 or juz run EXE file.
+Compile it in VS2019 or just run EXE file.
 
 
 ## Features
 List of features ready and TODOs for future development
-* More readed format.
+* More format to read.
 * Navigation for readed object.
 * Light changing.
 
