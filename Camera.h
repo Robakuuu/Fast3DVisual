@@ -4,8 +4,9 @@
 class Camera
 {
 public:
-	Camera(const char* oVertexShaderPath, const char* oFragmentShaderPath);
+	Camera(ShaderProgram *sp);
 	GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path);
+	GLuint LoadDDS(const char* imagepath);
 
 	void SetProgramID(GLuint GLuIProgramID) { m_GLuIProgramID = GLuIProgramID; };
 	GLuint GetProgramID() { return m_GLuIProgramID; };
@@ -23,6 +24,7 @@ public:
 	glm::mat4 GetModel() { return m_mat4Model; };
 
 	glm::mat4 GetMvp() { return m_mat4Mvp; };
+	void UpdateMvp(ShaderProgram* sp);
 
 
 private:
@@ -32,4 +34,5 @@ private:
 	glm::mat4 m_mat4Model;
 	glm::mat4 m_mat4Mvp = m_mat4Projection * m_mat4View * m_mat4Model;
 	GLuint m_GLuIMatrixID;
+
 };

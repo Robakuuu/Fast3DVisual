@@ -27,6 +27,12 @@
     <ClCompile Include="ObjFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="shaderprogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lodepng.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Macro\Macro.h">
@@ -41,5 +47,43 @@
     <ClInclude Include="ObjFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="shaderprogram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lodepng.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="f_colored.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="f_constant.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="f_lambert.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="f_lamberttextured.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="f_textured.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="v_colored.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="v_constant.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="v_lambert.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="v_lamberttextured.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="v_textured.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
