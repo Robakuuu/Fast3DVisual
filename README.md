@@ -1,5 +1,4 @@
 # Fast3DVisual
-> Fast3DVisual is a program that allows you to visualize 3D models by OpenGL. 
 
 ## Table of contents
 * [General info](#general-info)
@@ -13,7 +12,7 @@
 
 ## General info
 Fast3DVisual allows you to Drag&Drop 3D object file (for example .obj) and visualize it on window.
-
+![Alt text](https://github.com/Robakuuu/Fast3DVisual/blob/main/3d%20visualizer.png "3D Visualizer")
 ## Technologies
 * OpenGL
 * GLFW
