@@ -1,5 +1,7 @@
 #include "DrawScene.h"
 #include "Camera.h"
+#include "Keyboard.h"
+#include "text2D.hpp"
 #include "ObjFile.h"
 #include <windows.h>
 #include <shellapi.h>
@@ -16,6 +18,37 @@ void DropCallback(GLFWwindow* window, int count, const char** paths)
         std::cout << "- " << paths[i] << std::endl;
     }
     global_PathsToObjects = paths[0];
+}
+ShaderProgram* Scene::GetShaderProgramByName(std::string sShaderProgramName)
+{
+    if (sShaderProgramName == "Lambert")
+    {
+        return spLambert;
+    }
+    else if(sShaderProgramName == "LambertTextured")
+    {
+        return spLambertTextured;
+    }
+    else if (sShaderProgramName == "Constant")
+    {
+        return spConstant;
+    }
+    else if (sShaderProgramName == "Colored")
+    {
+        return spColored;
+    }
+    else if (sShaderProgramName == "Textured")
+    {
+        return spTextured;
+    }
+
+    return spLambert;
+}
+void Scene::InitDefaultTextureAndShaders(const char* sDefaultTexturePath, std::string sDefaultShaderProgramName)
+{
+    m_GLIntTexture = readTexture(sDefaultTexturePath);
+    SetPointerToShader(GetShaderProgramByName(sDefaultShaderProgramName));
+    m_pShaderProgram->use();
 }
 GLuint Scene::readTexture(const char* filename) {
     GLuint tex;
@@ -66,46 +99,52 @@ Scene::Scene()
         glewInit();
         initShaders();
         glfwSetDropCallback(window, DropCallback);
-   
-        m_GLIntTexture = readTexture("Blank.png");
-        SetPointerToShader(spLambertTextured);
-        m_pShaderProgram->use();
+        InitDefaultTextureAndShaders(DEFAULT_TEXTURE_PATH,DEFAULT_SHADER);
+        initText2D("Fonts/Holstein.DDS");
+        //initText2D("Fonts/Fixed.dds");
 
         Camera oCamera(m_pShaderProgram);
-       
+        Keyboard oKeyboard;
+        
+        
         int iRotate = 1;
         float fRotate = 0.1;
+
         while (!glfwWindowShouldClose(window))
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            oKeyboard.CheckInput(window, m_pShaderProgram);
             
             
             if (global_PathsToObjects != oLastPath)
             {
                 PrepareBuffer(global_PathsToObjects.c_str());
                 oLastPath = global_PathsToObjects;
-              
                 bFirstStart = false;
             }
-             
-              
-                if (bIsAnyObject == true)
-                {
-                    oCamera.UpdateMvp(m_pShaderProgram);
-                    oCamera.SetModel(glm::rotate(oCamera.GetModel(), glm::radians(fRotate), glm::vec3(0, iRotate, 0)));
-                    //iRotate++;
-                    //fRotate += 0.1;
-                    std::cout << "Model: " << iRotate << " fRotate: " << fRotate << std::endl;
+            if (bIsAnyObject == true)
+            {
+                oCamera.UpdateMvp(m_pShaderProgram);
+                oCamera.SetModel(glm::rotate(oCamera.GetModel(), glm::radians(fRotate), glm::vec3(0, iRotate, 0)));
+                std::cout << "Model: " << iRotate << " fRotate: " << fRotate << std::endl;
 
-                    DrawScene();
-                   glfwSwapBuffers(window);
-                }
-                else
-                {
-                    DrawBlankStart();
-                    glfwSwapBuffers(window);
-                }   
-                glfwPollEvents();
+                std::string s = std::to_string(fRotate);
+                char const* pchar = s.c_str();  //use char const* as target type
+
+                printText2D(pchar, 10, 500, 60);
+                DrawScene();
+
+                glfwSwapBuffers(window);
+                
+
+            }
+            else
+            {
+                DrawBlankStart();
+                glfwSwapBuffers(window);
+            }   
+            glfwPollEvents();
             
         }
     }
@@ -139,6 +178,11 @@ void Scene::PrepareBuffer(const char* pathToObject)
         m_vec4Colors.push_back(tmp);
     }
     bIsAnyObject = true;
+
+   //glGenBuffers(1, &m_GLIntVertexBuffer);
+   //glGenBuffers(1, &m_GLIntUvBuffer);
+  // glGenBuffers(1, &m_GLIntNormalBuffer);
+   //glGenBuffers(1, &m_GLIntTexture);
 }
 void Scene::ClearObjectData()
 {
@@ -172,12 +216,17 @@ void Scene::DrawBlankStart()
 }
 void Scene::DrawScene()
 {
+    m_pShaderProgram->use();
 
     glEnableVertexAttribArray(m_pShaderProgram->a("vertex"));
     glEnableVertexAttribArray(m_pShaderProgram->a("normal"));
     glEnableVertexAttribArray(m_pShaderProgram->a("texCoord0"));
     glEnableVertexAttribArray(m_pShaderProgram->a("color"));
 
+    //glBindBuffer(GL_ARRAY_BUFFER, m_GLIntVertexBuffer);
+   // glBindBuffer(GL_ARRAY_BUFFER, m_GLIntNormalBuffer);
+   // glBindBuffer(GL_ARRAY_BUFFER, m_GLIntUvBuffer);
+   // glBindBuffer(GL_ARRAY_BUFFER, m_GLIntTexture);
 
     glVertexAttribPointer(m_pShaderProgram->a("vertex"), 4, GL_FLOAT, false, 0, &m_vec4PreparedVertices[0]);
     glVertexAttribPointer(m_pShaderProgram->a("normal"), 4, GL_FLOAT, false, 0, &m_vec4PreparedNormals[0]);

@@ -86,7 +86,7 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>E:\Pulpit stare\Korki\C++\3DVisualizer;E:\Pulpit stare\Korki\C++\3DVisualizer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
@@ -104,7 +104,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>E:\Pulpit stare\Korki\C++\3DVisualizer;E:\Pulpit stare\Korki\C++\3DVisualizer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
@@ -149,18 +149,27 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DrawScene.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="ObjFile.cpp" />
+    <ClCompile Include="shader.cpp" />
     <ClCompile Include="shaderprogram.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="text2D.cpp" />
+    <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DrawScene.h" />
+    <ClInclude Include="Keyboard.h" />
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="Macro\Macro.h" />
     <ClInclude Include="ObjFile.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="shader.hpp" />
     <ClInclude Include="shaderprogram.h" />
+    <ClInclude Include="text2D.hpp" />
+    <ClInclude Include="texture.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="f_colored.glsl" />
@@ -168,11 +177,22 @@
     <None Include="f_lambert.glsl" />
     <None Include="f_lamberttextured.glsl" />
     <None Include="f_textured.glsl" />
+    <None Include="TextVertexShader.fragmentshader" />
+    <None Include="TextVertexShader.vertexshader" />
     <None Include="v_colored.glsl" />
     <None Include="v_constant.glsl" />
     <None Include="v_lambert.glsl" />
     <None Include="v_lamberttextured.glsl" />
     <None Include="v_textured.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="3DVisualizer.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="favicon.ico" />
+    <Image Include="Icon.ico" />
+    <Image Include="icon1.ico" />
+    <Image Include="Icona.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

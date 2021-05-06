@@ -1,0 +1,12 @@
+﻿  DrawScene.cpp
+E:\Pulpit stare\Korki\C++\3DVisualizer\include\glm\detail\type_quat.hpp(48,1): warning C4201: nonstandard extension used: nameless struct/union
+E:\Pulpit stare\Korki\C++\3DVisualizer\include\glm\detail\type_quat.hpp(133): message : see reference to class template instantiation 'glm::qua<T,Q>' being compiled
+E:\Pulpit stare\Korki\C++\3DVisualizer\DrawScene.cpp(13,31): warning C4100: 'window': unreferenced formal parameter
+E:\Pulpit stare\Korki\C++\3DVisualizer\DrawScene.cpp(111,28): warning C4305: 'initializing': truncation from 'double' to 'float'
+E:\Pulpit stare\Korki\C++\3DVisualizer\DrawScene.cpp(163,23): warning C4018: '<': signed/unsigned mismatch
+E:\Pulpit stare\Korki\C++\3DVisualizer\DrawScene.cpp(167,23): warning C4018: '<': signed/unsigned mismatch
+E:\Pulpit stare\Korki\C++\3DVisualizer\DrawScene.cpp(171,23): warning C4018: '<': signed/unsigned mismatch
+E:\Pulpit stare\Korki\C++\3DVisualizer\DrawScene.cpp(175,31): warning C4018: '<': signed/unsigned mismatch
+E:\Pulpit stare\Korki\C++\3DVisualizer\DrawScene.cpp(215,34): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+E:\Pulpit stare\Korki\C++\3DVisualizer\DrawScene.cpp(251,34): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+  3DVisualizer.vcxproj -> E:\Pulpit stare\Korki\C++\3DVisualizer\Debug\3DVisualizer.exe

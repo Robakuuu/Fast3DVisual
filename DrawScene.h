@@ -25,10 +25,11 @@ public:
 	void DrawScene();
 	void DrawBlankStart();
 	void ClearObjectData();
-	void SetPointerToShader(ShaderProgram* pShader) {
-		m_pShaderProgram = pShader;
-	};
-	//GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path);
+	void InitDefaultTextureAndShaders(const char* sDefaultTexturePath, std::string sDefaultShaderProgramName);
+	ShaderProgram* GetShaderProgramByName(std::string sShaderProgramName);
+
+	void SetPointerToShader(ShaderProgram* pShader) {m_pShaderProgram = pShader;};
+	ShaderProgram* GetPointerToShader() {return m_pShaderProgram;};
 
 private:
 	GLuint VertexArrayID;

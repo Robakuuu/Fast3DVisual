@@ -1,0 +1,2 @@
+E:\Pulpit stare\Korki\C++\3DVisualizer\Debug\3DVisualizer.exe
+E:\Pulpit stare\Korki\C++\3DVisualizer\Debug\3DVisualizer.pdb
