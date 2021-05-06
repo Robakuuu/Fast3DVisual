@@ -12,6 +12,7 @@
 ## General info
 Fast3DVisual allows you to Drag&Drop 3D object file (for example .obj) and visualize it on window.
 ![Alt text](https://github.com/Robakuuu/Fast3DVisual/blob/main/3d%20visualizer.png "3D Visualizer")
+![Alt text](https://github.com/Robakuuu/Fast3DVisual/blob/main/3dVisualize.gif)
 ## Technologies
 * OpenGL
 * GLFW
