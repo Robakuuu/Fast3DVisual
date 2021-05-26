@@ -45,12 +45,34 @@ bool ObjFile::loadOBJ(const char* path,
         }
         else if (strcmp(lineHeader, "f") == 0) {
             std::string vertex1, vertex2, vertex3;
+            char mystring[128];
             unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
-            int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
-            if (matches != 9) {
-                printf("File can't be read by our simple parser : ( Try exporting with other options\n");
-                return false;
+            fgets(mystring, sizeof(mystring), file);
+            std::string line(mystring);
+            int index = line.find("//");
+            if (index > -1)
+            {
+                int matches=sscanf_s(line.c_str(), "%d//%d %d//%d %d//%d\n", &vertexIndex[0], &normalIndex[0], &vertexIndex[1], &normalIndex[1], &vertexIndex[2], &normalIndex[2]);
+                uvIndex[0] = -1;
+                uvIndex[1] = -1;
+                uvIndex[2] = -1;
+                if (matches != 6) {
+
+                    printf("File can't be read by our simple parser : ( Try exporting with other options\n");
+                    return false;
+                }
             }
+            else
+            {
+                int matches=sscanf_s(line.c_str(), "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
+                if (matches != 9) {
+
+                    printf("File can't be read by our simple parser : ( Try exporting with other options\n");
+                    return false;
+                }
+            }
+            
+            
             vertexIndices.push_back(vertexIndex[0]);
             vertexIndices.push_back(vertexIndex[1]);
             vertexIndices.push_back(vertexIndex[2]);
@@ -69,8 +91,16 @@ bool ObjFile::loadOBJ(const char* path,
     }
     for (unsigned int i = 0; i < uvIndices.size(); i++) {
         unsigned int uvIndex = uvIndices[i];
-        glm::vec2 uv = temp_uvs[uvIndex - 1];
-        out_uvs.push_back(uv);
+        if (uvIndex == -1)
+        {
+            glm::vec2 uv = glm::vec2(0, 0);
+            out_uvs.push_back(uv);
+        }
+        else
+        {
+            glm::vec2 uv = temp_uvs[uvIndex - 1];
+            out_uvs.push_back(uv);
+        } 
     }
     for (unsigned int i = 0; i < normalIndices.size(); i++) {
         unsigned int normalIndex = normalIndices[i];
